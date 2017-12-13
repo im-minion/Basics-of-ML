@@ -17,11 +17,13 @@ vp = 6
 Grammar:
 y = 1
 n = 0
+
+class labels 0.1 to 0.9 simplifies to 0 to 9 for calculation purpose
 '''
 
 x = np.array(xf.values)
 yf = df[['class']]
-y = np.array(yf.values)
+y = np.array(yf.values).ravel()
 clf = GaussianNB()
 clf.fit(x,y)
 
