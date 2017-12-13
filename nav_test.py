@@ -26,9 +26,10 @@ clf = GaussianNB()
 clf.fit(x,y)
 
 # predict for 
-# 1. keyword = verygood, grammar = no, qst = ok
-# 2. keyword = verygood, grammar = no, qst = vg
-
+# 1. keyword = verygood, grammar = no, qst = ok 
+# => 6
+# 2. keyword = verygood, grammar = no, qst = vg 
+# => 8
 predicted = clf.predict([[2,0,4],[2,0,2]])
 
 print(predicted)
