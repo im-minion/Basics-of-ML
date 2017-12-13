@@ -1,0 +1,43 @@
+from sklearn.naive_bayes import GaussianNB
+import numpy as np
+import pandas as pd
+df = pd.read_csv('finaldataset.csv')
+xf = df[['keyword','grammar','qst']]
+
+# print(xf.values)
+x = np.array(xf.values)
+yf = df[['class']]
+y = np.array(yf.values)
+clf = GaussianNB()
+clf.fit(x,y)
+predicted = clf.predict([[2,0,4],[2,0,2]])
+print(predicted)
+
+# print(yf.values)
+# x= np.array([[-3,7],[1,5], [1,2], [-2,0], [2,3], [-4,0], [-1,1], [1,1], [-2,2], [2,7], [-4,1], [-2,7]])
+# y = np.array([3, 3, 3, 3, 4, 3, 3, 4, 3, 4, 4, 4])
+# # lx= np.array(
+# # 	[
+# # 		['e','y','e'],
+# # 		['e','n','e'],
+# # 		['vg','n','e'],
+# # 		['e','y','vg'],
+# # 		['e','n','g']
+# # 	]
+# # 	)
+# # ly = np.array(
+# # 	[
+# # 		0.9,
+# # 		0.9,
+# # 		0.8,
+# # 		0.8,
+# # 		0.7
+# # 	]
+# # 	)
+# model = GaussianNB()
+
+# # model.fit(lx,ly)
+# model.fit(x,y)
+
+# predicted = model.predict([[-1,-3],[-3,2]])
+# print(predicted)
