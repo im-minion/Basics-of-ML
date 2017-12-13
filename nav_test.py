@@ -1,16 +1,36 @@
 from sklearn.naive_bayes import GaussianNB
 import numpy as np
 import pandas as pd
+
 df = pd.read_csv('finaldataset.csv')
 xf = df[['keyword','grammar','qst']]
 
-# print(xf.values)
+''''
+keywords and qst:
+e = 1
+vg = 2
+g = 3
+o = 4
+p = 5
+vp = 6
+
+Grammar:
+y = 1
+n = 0
+'''
+
 x = np.array(xf.values)
 yf = df[['class']]
 y = np.array(yf.values)
 clf = GaussianNB()
 clf.fit(x,y)
+
+# predict for 
+# 1. keyword = verygood, grammar = no, qst = ok
+# 2. keyword = verygood, grammar = no, qst = vg
+
 predicted = clf.predict([[2,0,4],[2,0,2]])
+
 print(predicted)
 
 # print(yf.values)
