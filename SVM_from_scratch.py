@@ -19,7 +19,7 @@ class support_vector_machine:
 		opt_dict = {}
 
 		transforms = [
-			[1,1],[-1,1],[1,-1],[-1,-1]
+			[1,1],[-1,1],[-1,-1],[1,-1]
 		]
 		# we apply this above transform to vector w
 
@@ -62,12 +62,20 @@ class support_vector_machine:
 								yi = i
 								if not yi*(np.dot(w_t,xi) + b) >= 1:
 									found_option = False
-									break
-
-				
-
-		
-
+						if found_option:
+							opt_dict[np.linalg.norm(w_t)] = [w_t,b]
+					if w[0] < 0:
+						optimized = True
+						print('optimized a step')
+					else:
+						w = w - step
+			
+			norms = sorted([n for n in opt_dict])
+			# ||w|| : [w,b]
+			opt_choice = opt_dict[norm[0]]
+			self.w = opt_choice[0]
+			self.b = opt_choice[1]
+			latest_optimum = opt_choice[0][0] + step*2
 		
 	
 	def predict(self, features):
