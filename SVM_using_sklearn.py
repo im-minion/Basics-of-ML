@@ -1,6 +1,6 @@
 # we have support vectors
-# at T Bell labs, most popular 
-# binary classifier
+# devped at T Bell labs, most popular 
+# binary classifier, non probabilistic
 import numpy as np
 from sklearn import preprocessing, cross_validation, neighbors, svm
 import pandas as pd
@@ -15,7 +15,7 @@ for  i in range(25):
   y = np.array(df['class'])
 
   X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size = 0.2)
-
+ 
   clf = svm.SVC()	#same preogram as KNN just replacing this line for chanaging algoritm
   clf.fit(X_train, y_train)
 

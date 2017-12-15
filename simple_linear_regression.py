@@ -21,7 +21,7 @@ df = df[['Adj. Close','HL_PCT','PCT_change','Adj. Volume']]
 
 forecast_col = 'Adj. Close'
 
-df.fillna(-99999, inplace=True)
+df.fillna(-99999, inplace=True) # preprocessing
 
 forecast_out = int(math.ceil(0.01*len(df)))
 print(forecast_out)
