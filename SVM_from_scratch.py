@@ -64,11 +64,11 @@ class support_vector_machine:
 									found_option = False
 						if found_option:
 							opt_dict[np.linalg.norm(w_t)] = [w_t,b]
-					if w[0] < 0:
-						optimized = True
-						print('optimized a step')
-					else:
-						w = w - step
+				if w[0] < 0:
+					optimized = True
+					print('optimized a step')
+				else:
+					w = w - step
 			
 			norms = sorted([n for n in opt_dict])
 			# ||w|| : [w,b]
@@ -106,8 +106,8 @@ class support_vector_machine:
 
 		# (w.x + b) = -1
 		# negative support vector hyperplane
-		nsv1 = hyperplane(hyp_x_min,self.w,self.b,1)
-		nsv2 = hyperplane(hyp_x_max,self.w,self.b,1)
+		nsv1 = hyperplane(hyp_x_min,self.w,self.b,-1)
+		nsv2 = hyperplane(hyp_x_max,self.w,self.b,-1)
 		self.ax.plot([hyp_x_min,hyp_x_max],[nsv1,nsv2])
 
 		# (w.x + b) = 0
@@ -119,7 +119,7 @@ class support_vector_machine:
 
 data_dict = {
 	-1 : np.array(
-		[[1,7],[2,8],[3,8]]
+		[[1,7],[2,8],[3,8],]
 		),
 	1 : np.array(
 		[[5,1],[6,-1],[7,3]]
