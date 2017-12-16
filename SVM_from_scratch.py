@@ -62,6 +62,7 @@ class support_vector_machine:
 								yi = i
 								if not yi*(np.dot(w_t,xi) + b) >= 1:
 									found_option = False
+									# print(xi,':', yi*(np.dot(w_t,xi) + b))
 						if found_option:
 							opt_dict[np.linalg.norm(w_t)] = [w_t,b]
 				if w[0] < 0:
@@ -76,8 +77,11 @@ class support_vector_machine:
 			self.w = opt_choice[0]
 			self.b = opt_choice[1]
 			latest_optimum = opt_choice[0][0] + step*2
+		for i in self.data:
+			for xi in self.data[i]:
+				yi = i
+				print(xi,':', yi*(np.dot(self.w,xi) + self.b))
 		
-	
 	def predict(self, features):
 		# sign( x.w + b)
 		classification = np.sign(np.dot(np.array(features), self.w ) + self.b)
@@ -102,19 +106,19 @@ class support_vector_machine:
 		# positive support vector hyperplane
 		psv1 = hyperplane(hyp_x_min,self.w,self.b,1)
 		psv2 = hyperplane(hyp_x_max,self.w,self.b,1)
-		self.ax.plot([hyp_x_min,hyp_x_max],[psv1,psv2])
+		self.ax.plot([hyp_x_min,hyp_x_max],[psv1,psv2], 'k')
 
 		# (w.x + b) = -1
 		# negative support vector hyperplane
 		nsv1 = hyperplane(hyp_x_min,self.w,self.b,-1)
 		nsv2 = hyperplane(hyp_x_max,self.w,self.b,-1)
-		self.ax.plot([hyp_x_min,hyp_x_max],[nsv1,nsv2])
+		self.ax.plot([hyp_x_min,hyp_x_max],[nsv1,nsv2], 'k')
 
 		# (w.x + b) = 0
 		# decision boundry support vector hyperplane
 		dsv1 = hyperplane(hyp_x_min,self.w,self.b,0)
 		dsv2 = hyperplane(hyp_x_max,self.w,self.b,0)
-		self.ax.plot([hyp_x_min,hyp_x_max],[dsv1,dsv2])
+		self.ax.plot([hyp_x_min,hyp_x_max],[dsv1,dsv2], 'y--')
 		plt.show()
 
 data_dict = {
@@ -127,4 +131,11 @@ data_dict = {
 }
 svm = support_vector_machine()
 svm.fit(data=data_dict)
+
+predict_this = [
+	[0,10],[1,3],[3,4],[3,5],[5,5],[5,6],[6,-5],[5,8]
+]
+
+for p in predict_this:
+	svm.predict(p)
 svm.visualize()
