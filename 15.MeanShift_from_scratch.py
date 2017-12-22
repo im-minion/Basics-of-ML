@@ -6,7 +6,7 @@ import random
 
 centers = random.randrange(2,5)
 
-X, y = make_blobs(n_samples=30, centers=centers,n_features=2)
+X, y = make_blobs(n_samples=100, centers=centers,n_features=2)
 style.use('ggplot')
 
 # X = np.array([
@@ -53,7 +53,7 @@ class MEANSHIFT_:
 					weight_index = int(distance/self.radius)
 					if weight_index > self.radius_norm_step-1:
 						weight_index = self.radius_norm_step-1
-					to_add = (weights[weight_index]**2)*[feature]
+					to_add = (weights[weight_index]*2)*[feature]
 					in_bandwidth += to_add
 					
 					new_centroid = np.average(in_bandwidth,axis=0)
