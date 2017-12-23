@@ -7,16 +7,17 @@ import random
 centers = random.randrange(2,5)
 
 X, y = make_blobs(n_samples=100, centers=centers,n_features=2)
+# makeblob used for generating sample dataset :)
+# increse th value of n_samples in your limits :p otherwise it'll run forever
 style.use('ggplot')
 
 # X = np.array([
-# 	[1,2],[1.5,1.8],[5,8],[8,8],[1,0.6],[9,11],[8,2],[10,2],[9,3]
-# ])
+# 	[1,2],[1.5,1.8],[5,8],[8,8],[1,0.6],[9,11],[8,2],[10,2],[9,3] ])
 
 # plt.scatter(X[:,0],X[:,1],s=150)
 # plt.show()
 
-colors = 10*["g","r","b","k","c","y"]
+colors = 10*["g","r","b","k","y","c"]
 
 # Hierarchical Clustering
 
@@ -44,7 +45,6 @@ class MEANSHIFT_:
 				centroid = centroids[i]
 
 				weights = [i for i in range(self.radius_norm_step)][::-1]
-
 
 				for feature in data:
 					distance = np.linalg.norm(feature-centroid)
@@ -119,9 +119,9 @@ for classification in clf.classifications:
 	for feature in clf.classifications[classification]:
 		plt.scatter(feature[0],feature[1],marker='o',color=color,s=150,linewidths=5)
 
+# print(X[:,0]," ",X[:,1])
 plt.scatter(X[:,0],X[:,1],s=150)
 
 for c in centroids:
 	plt.scatter(centroids[c][0],centroids[c][1],color='k',marker='*',s =150)
 plt.show()
-
