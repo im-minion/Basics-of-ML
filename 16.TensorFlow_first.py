@@ -20,3 +20,5 @@ with tf.Session() as sess:
 	output = sess.run(result)
 	print(output)
 # cant access output varible here
+# Environment path:-
+# export PATH="$PATH:/usr/local/cuda-8.0/bin" export LD_LIBRARY_PATH="/usr/local/cuda-8.0/lib64"
