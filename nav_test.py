@@ -4,7 +4,7 @@ import pandas as pd
 
 df = pd.read_csv('finaldataset.csv')
 xf = df[['keyword','grammar','qst']]
-
+# intigrate keyword, grammar, qst :)
 ''''
 keywords and qst:
 e = 1
