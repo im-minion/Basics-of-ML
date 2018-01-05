@@ -4,7 +4,7 @@ mnist = input_data.read_data_sets("/tmp/data/", one_hot = True)
 
 n_classes = 10
 batch_size = 128
-hm_epochs = 5
+hm_epochs = 10
 
 x = tf.placeholder('float', [None, 784])
 y = tf.placeholder('float')
@@ -39,10 +39,10 @@ def convolutional_neural_network_model(x):
 	x = tf.reshape(x, shape=[-1, 28, 28, 1])
 	# reshaping 184 pixel image to a flat 28*28 image
 	
-	conv1 = tf.nn.relu(conv_2D(x,weights['w_convl1'] + biases['b_convl1']))
+	conv1 = tf.nn.relu(conv_2D(x,weights['w_convl1']) + biases['b_convl1'])
 	conv1 = maxpool_2D(conv1)
 
-	conv2 = tf.nn.relu(conv_2D(conv1,weights['w_convl2'] + biases['b_convl2']))
+	conv2 = tf.nn.relu(conv_2D(conv1,weights['w_convl2'])+ biases['b_convl2'])
 	conv2 = maxpool_2D(conv2)
 	
 	fc = tf.reshape(conv2,[-1,7*7*64])
