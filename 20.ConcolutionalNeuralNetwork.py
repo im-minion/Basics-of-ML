@@ -4,10 +4,13 @@ mnist = input_data.read_data_sets("/tmp/data/", one_hot = True)
 
 n_classes = 10
 batch_size = 128
-hm_epochs = 10
+hm_epochs = 5
 
 x = tf.placeholder('float', [None, 784])
 y = tf.placeholder('float')
+
+keep_rate = 0.8
+keep_prob = tf.placeholder('float')
 
 def conv_2D(x,W):
 	return tf.nn.conv2d(x,W,strides=[1,1,1,1],padding='SAME')
@@ -45,6 +48,9 @@ def convolutional_neural_network_model(x):
 	fc = tf.reshape(conv2,[-1,7*7*64])
 	fc = tf.nn.relu(tf.matmul(fc, weights['w_fc']) + biases['b_fc'])
 
+	fc = tf.nn.dropout(fc,keep_rate)
+	# here dropout is 0.8 i.e. 80% of the neurons passed further
+	# for much larger dataset drop outs are used and impacts lot :)
 	output = tf.matmul(fc, weights['out']) + biases['out']
 	return output
 
