@@ -34,6 +34,8 @@ convnet = regression(convnet,optimizer='adam',learning_rate=0.01,loss='categoric
 model = tflearn.DNN(convnet)
 # DNN -> deep neural network
 
+'''
+# uncomment this whole thing for the first tym running
 model.fit(
 	{'input':X}, 
 	{'targets':Y}, 
@@ -47,3 +49,10 @@ model.fit(
 	)
 
 model.save('tflearncnn.model')
+# this will save the model not the dataset and not the pickel type
+# once saving is done and we are ready to use that 'tflearncnn.model' file as below
+'''
+model.load('tflearncnn.model')
+
+# print( model.predict( [test_x[1]] ) )
+# check above line few data losses error are there
