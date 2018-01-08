@@ -10,7 +10,7 @@ IMG_SIZE = 50 # 50x50
 # all images are not of same size so make them 
 LR = 1e-3 # learning rate
 
-MODEL_NAME = 'dogsvscat-{}-{}.model'.format(LR,'2con-basic-video')
+MODEL_NAME = 'dogsvscat-{}-{}.model'.format(LR,'6con-basic-video')
 
 def label_img(img):
 	word_label = img.split('.')[-3]
@@ -41,15 +41,18 @@ def process_test_data():
 	return testing_data
 
 
-# train_data = create_train_data()
+train_data = create_train_data()
 # for the first tym this will create the 'traindata.npy' file
 # after that comment above line and uncomment the following line
-train_data = np.load('traindata.npy')
+# train_data = np.load('traindata.npy')
 
 import tflearn
 from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.estimator import regression
+
+import tensorflow as tf
+tf.reset_default_graph()
 
 convnet = input_data(shape=[None, IMG_SIZE, IMG_SIZE, 1], name='input')
 
@@ -58,6 +61,19 @@ convnet = max_pool_2d(convnet, 2)
 
 convnet = conv_2d(convnet, 64, 2, activation='relu')
 convnet = max_pool_2d(convnet, 2)
+
+convnet = conv_2d(convnet, 32, 2, activation='relu')
+convnet = max_pool_2d(convnet, 2)
+
+convnet = conv_2d(convnet, 64, 2, activation='relu')
+convnet = max_pool_2d(convnet, 2)
+
+convnet = conv_2d(convnet, 32, 2, activation='relu')
+convnet = max_pool_2d(convnet, 2)
+
+convnet = conv_2d(convnet, 64, 2, activation='relu')
+convnet = max_pool_2d(convnet, 2)
+
 
 convnet = fully_connected(convnet, 1024, activation='relu')
 convnet = dropout(convnet, 0.8)
