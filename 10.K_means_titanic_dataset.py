@@ -27,10 +27,6 @@ predict servived or not?
 
 '''
 
-df = pd.read_excel('titanic.xls')
-df.drop(['body','name'], 1, inplace=True)
-df.convert_objects(convert_numeric=True)
-df.fillna(0,inplace=True)
 
 # print(df.head())
 
@@ -52,9 +48,15 @@ def handle_non_numeric_data(df):
 			df[column] = list(map(convert_to_int,df[column]))
 	return df
 
-df = handle_non_numeric_data(df)
+
+df = pd.read_excel('titanic.xls')
+df.drop(['body','name'], 1, inplace=True)
 # here we can try droping the ticket column and boat column
+
 df.drop(['boat','ticket'],1, inplace=True)
+df.convert_objects(convert_numeric=True)
+df.fillna(0,inplace=True)
+df = handle_non_numeric_data(df)
 
 X = np.array(df.drop(['survived'],1).astype(float))
 X = preprocessing.scale(X)
